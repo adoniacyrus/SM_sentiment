@@ -1,0 +1,183 @@
+{% include 'public_header.html' %}
+
+<!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+
+      <img src="static/assets/img/hero-bg.jpg" alt="" data-aos="fade-in">
+
+      <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <h2>LOGIN</h2>
+
+            <br>
+
+
+                    <!-- Display flash messages -->
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            <ul class="flash-messages">
+                                {% for category, message in messages %}
+                                    <li class="flash {{ category }}">{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endwith %}
+                    
+                    <form method="post" onsubmit="return validateForm()" class="login-form">
+                        <div class="form-group">
+                            <label for="uname">Username</label>
+                            <input type="text" name="uname" id="uname" required class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="pass">Password</label>
+                            <input type="password" name="pass" id="pass" required class="form-control">
+                        </div>
+                        <div class="form-group text-center">
+                            <input type="submit" name="sub" value="LOGIN" class="btn-submit">
+                        </div>
+                    </form>
+                </div>
+                <br>
+               </div>
+        </div>
+      </div>
+
+    </section><!-- /Hero Section -->    
+
+<script>
+    function validateForm() {
+        // Get the values of the input fields
+        var uname = document.getElementById('uname').value;
+        var pass = document.getElementById('pass').value;
+        
+        // Check if the username and password are not empty
+        if (uname.trim() === "") {
+            alert("Username is required!");
+            return false;
+        }
+        
+        if (pass.trim() === "") {
+            alert("Password is required!");
+            return false;
+        }
+        
+        // Additional validation: check if the password is at least 6 characters
+        if (pass.length < 6) {
+            alert("Password must be at least 6 characters long!");
+            return false;
+        }
+        
+        // Optional: validate username to only allow alphanumeric characters
+        var usernamePattern = /^[a-zA-Z0-9]+$/;
+        if (!usernamePattern.test(uname)) {
+            alert("Username must only contain letters and numbers!");
+            return false;
+        }
+
+        // If all checks pass, allow form submission
+        return true;
+    }
+</script>
+
+<style type="text/css">
+    /* Global Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f7fc;
+        margin: 0;
+        padding: 0;
+    }
+
+    .hero {
+        background-size: cover;
+        background-position: center;
+        padding: 100px 0;
+    }
+
+    .hero__text {
+        color: #fff;
+        padding: 30px;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-title {
+        font-size: 50px;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+
+    .flash-messages {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .flash {
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .flash.error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .flash.success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .login-form {
+        max-width: 450px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        padding: 12px 15px;
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        background-color: #fff;
+        font-size: 16px;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    .btn-submit {
+        background-color: #007bff;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        width: 100%;
+    }
+
+    .btn-submit:hover {
+        background-color: #218838;
+        transform: scale(1.05);
+    }
+
+    .btn-submit:active {
+        background-color: #1e7e34;
+        transform: scale(1);
+    }
+</style>
+
+</body>
+{% include 'footer.html' %}

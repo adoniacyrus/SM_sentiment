@@ -1,0 +1,163 @@
+{% include "user_header.html" %}
+
+<!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+
+      <img src="static/assets/img/hero-bg.jpg" alt="" data-aos="fade-in">
+
+      <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+<div class="complaint-container">
+    <h2>SEND COMPLAINTS</h2>
+
+    <!-- Complaint Form -->
+    <form action="" method="post" class="complaint-form">
+        <h3>Submit Your Complaint</h3>
+        <div>
+            <label for="com" class="form-label">Complaint:</label>
+            <textarea name="com" id="com" class="form-control" rows="4" required></textarea>
+        </div>
+        <div class="form-actions">
+            <input type="submit" name="sub" value="SEND" class="btn-submit">
+        </div>
+    </form>
+
+    <!-- Replies Section -->
+    <h3 class="text-center">View Replies</h3>
+    <table class="reply-table">
+        <thead>
+            <tr>
+                <th>COMPLAINTS</th>
+                <th>REPLY</th>
+                <th>DATE & TIME</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data['x'] %}
+            <tr>
+                <td>{{ i['complaint'] }}</td>
+                <td>{{ i['reply'] }}</td>
+                <td>{{ i['date'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+</div>
+</section>
+{% include "footer.html" %}
+
+<!-- Styles -->
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+    }
+
+    .complaint-container {
+        width: 80%;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .complaint-container h2, 
+    .complaint-container h3 {
+        text-align: center;
+        color: #333333;
+        margin-bottom: 20px;
+    }
+
+    .complaint-form {
+        margin-bottom: 40px;
+    }
+
+    .complaint-form .form-label {
+        font-size: 14px;
+        font-weight: bold;
+        color: #555555;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .complaint-form .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    .complaint-form .btn-submit {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .complaint-form .btn-submit:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+    .complaint-form .btn-submit:active {
+        background-color: #004085;
+        transform: scale(1);
+    }
+
+    .reply-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+
+    .reply-table th, 
+    .reply-table td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    .reply-table th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+        color: #555555;
+    }
+
+    .reply-table td {
+        font-size: 14px;
+        color: #666666;
+    }
+
+    @media screen and (max-width: 768px) {
+        .complaint-container {
+            width: 90%;
+        }
+
+        .reply-table th, 
+        .reply-table td {
+            font-size: 12px;
+            padding: 8px;
+        }
+
+        .complaint-form .form-control {
+            font-size: 13px;
+        }
+
+        .complaint-form .btn-submit {
+            font-size: 14px;
+        }
+    }
+</style>

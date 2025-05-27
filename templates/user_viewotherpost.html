@@ -1,0 +1,74 @@
+{% include "user_header.html" %}
+
+<div style=" background:url('static/assets/img/portfolio/branding-1.jpg') ; height: 100px; width: 100%; background-size: cover;"  >
+    </div>
+    
+   <h1 align="center"><b>View other Post</b></h1>
+
+   <div style="text-align: center; margin-bottom: 20px;">
+    <a href="{{ url_for('user.user_viewotherpost') }}" class="btn-view-products">All</a>
+    <a href="{{ url_for('user.user_viewotherpost', sentiment='positive') }}" class="btn-view-products">Positive</a>
+    <a href="{{ url_for('user.user_viewotherpost', sentiment='negative') }}" class="btn-view-products">Negative</a>
+    <a href="{{ url_for('user.user_viewotherpost', sentiment='neutral') }}" class="btn-view-products">Neutral</a>
+</div>
+
+
+    <!-- View Products List -->
+<table align="center" border="2" class="table table-bordered">
+        <tr>
+            <th>User Name</th>
+            <th>POST</th>
+            <th>IMAGE</th>
+            <th>SENTIMENT</th>
+            <th>DATE</th>
+<!--             <th>STATUS</th>
+ -->       </tr>
+        {% for i in data['res'] %}
+        <tr>
+            <td>{{ i['fullname'] }}</td>
+            <td>{{ i['post'] }}</td>
+            <td><img src="{{ i['path'] }}" width="150px" height="150px"></td>
+            <td>{{ i['sentiment'] }}</td>
+            <td>{{ i['date'] }}</td>
+<!--             <td>{{ i['status'] }}</td>
+ -->            <td><a href="user_sendcomments?pid={{ i['post_id'] }}" class="btn-update">Comment</a> |
+               <a href="user_chatwithotherusers?rid={{ i['login_id'] }}" class="btn-delete">Chat</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+               
+
+<!-- Styles -->
+<style type="text/css">
+    .table {
+        width: 80%;
+        margin: 0 auto;
+        border-collapse: collapse;
+    }
+
+    .table th, .table td {
+        padding: 15px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    .table th, .table td {
+        text-align: center;
+    }
+
+    .btn-view-products {
+        background-color: #007bff;  /* Blue color for View Products */
+        color: white;
+    }
+
+    .btn-view-products:hover {
+        opacity: 0.8;
+    }
+
+    .btn-view-products:active {
+        opacity: 1;
+    }
+</style>
+
+{% include "footer.html" %}

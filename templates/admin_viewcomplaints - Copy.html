@@ -1,0 +1,142 @@
+{% include "admin_header.html" %}
+
+<!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+
+      <img src="static/assets/img/hero-bg.jpg" alt="" data-aos="fade-in">
+
+      <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+                    <h2 align="center" class="hero-title"><b>View Complaints</b></h2>
+
+                    <br><br>
+
+                    <!-- Complaints Table -->
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Complaints</th>
+                                    <th>Reply</th>
+                                    <th>Date & Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in data['x'] %}
+                                <tr>
+                                    <td><textarea name="com" readonly class="form-control">{{ i['fullname'] }}</textarea></td>
+                                    <td>
+                                        <textarea name="com" readonly class="form-control">{{ i['complaint'] }}</textarea>
+                                    </td>
+                                    <td>
+                                        {% if i['reply'] == 'pending' %}
+                                        <form action="" method="post">
+                                            <textarea name="reply_{{ i['complaint_id'] }}" placeholder="{{ i['reply'] }}" required class="form-control"></textarea>
+                                            <input type="hidden" name="complaint_id" value="{{ i['complaint_id'] }}">
+                                            <input type="submit" name="sub" value="Send" class="btn-submit">
+                                        </form>
+                                        {% else %}
+                                        <textarea name="reply_{{ i['complaint_id'] }}" readonly class="form-control">{{ i['reply'] }}</textarea>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ i['date'] }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+<!-- Hero Section End -->
+
+<!-- Styles -->
+<style type="text/css">
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .hero {
+        padding: 50px 0;
+        background-color: #f9f9f9;
+    }
+
+    .hero__text {
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 28px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .table-responsive {
+        margin-top: 30px;
+        overflow-x: auto;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table th, .table td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+
+    .table th {
+        background-color: #eaeaea;
+        color: #333;
+    }
+
+    .table td textarea {
+        width: 100%;
+        padding: 8px;
+        resize: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        min-height: 80px;
+        background-color: #f9f9f9;
+    }
+
+    .btn-submit {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+    .btn-submit:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-submit:active {
+        background-color: #003d80;
+    }
+
+    @media (max-width: 768px) {
+        .table th, .table td {
+            font-size: 12px;
+            padding: 8px;
+        }
+
+        .hero-title {
+            font-size: 22px;
+        }
+    }
+</style>
+
+{% include "footer.html" %}

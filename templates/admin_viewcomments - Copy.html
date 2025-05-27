@@ -1,0 +1,99 @@
+{% include "admin_header.html" %}
+<!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+
+      <img src="static/assets/img/hero-bg.jpg" alt="" data-aos="fade-in">
+
+      <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+ <h1 style="font-size: 40px"><b>View comments</b></h1>
+        <br>
+        <table align="center" border="2" class="table table-bordered">
+            <tr>
+                <th>Name</th>
+                <th>Comments</th>
+                <th>Out</th>
+           </tr>
+            {% for i in data['res'] %}
+            <tr>
+                <td>{{ i['fullname'] }}</td>
+                <td>{{ i['comment'] }}</td>
+ <td>{{ i['out'] }}</td>
+
+               <!-- <td>
+                    <a href="?action=update&cid={{ i['comment_id'] }}" class="btn-update">Update</a> |
+                    <a href="?action=delete&cid={{ i['comment_id'] }}" class="btn-delete">Delete</a>
+                </td> -->
+            </tr>
+            {% endfor%}
+        </table>
+           </div>
+            </div>
+        </div>
+</section>
+<!-- Hero Section End -->
+
+<!-- Styles -->
+<style type="text/css">
+    .table {
+        width: 80%;
+        margin: 0 auto;
+        border-collapse: collapse;
+    }
+
+    .table th, .table td {
+        padding: 15px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    .btn-block, .btn-unblock, .btn-view-products {
+        text-decoration: none;
+        padding: 8px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .btn-block {
+        background-color: #dc3545;  /* Red color for Block */
+        color: white;
+    }
+
+    .btn-unblock {
+        background-color: #28a745;  /* Green color for Unblock */
+        color: white;
+    }
+
+    .btn-view-products {
+        background-color: #007bff;  /* Blue color for View Products */
+        color: white;
+    }
+
+    .btn-block:hover, .btn-unblock:hover, .btn-view-products:hover {
+        opacity: 0.8;
+    }
+
+    .btn-block:active, .btn-unblock:active, .btn-view-products:active {
+        opacity: 1;
+    }
+
+    .btn-block {
+        background-color: #dc3545;  /* Red color */
+    }
+
+    .btn-unblock {
+        background-color: #28a745;  /* Green color */
+    }
+
+    .btn-view-products {
+        background-color: #007bff;  /* Blue color */
+    }
+
+    .table th, .table td {
+        text-align: center;
+    }
+</style>
+
+{% include "footer.html" %}

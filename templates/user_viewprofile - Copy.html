@@ -1,0 +1,193 @@
+{% include 'user_header.html' %}
+
+<!-- Hero Section or Header Background -->
+<div style="background:url('static/assets/img/portfolio/branding-1.jpg'); height: 100px; width: 100%; background-size: cover;"></div>
+
+<br>
+
+<!-- Profile Update Form -->
+<form method="post" onsubmit="return validateForm()" class="registration-form">
+
+  {% if data['s2'] %}
+    <h1 class="text-center" style="font-size: 40px; color: #333; font-weight: bold;">Edit Profile</h1>
+
+    <div class="form-group">
+        <label for="fname">First Name</label>
+        <input type="text" name="fname" id="fname" value="{{ data['s2'][0]['fname'] }}" class="form-control" placeholder="Enter first name" required>
+    </div>
+
+    <div class="form-group">
+        <label for="lname">Last Name</label>
+        <input type="text" name="lname" id="lname" value="{{ data['s2'][0]['lname'] }}" class="form-control" placeholder="Enter last name" required>
+    </div>
+
+    <div class="form-group">
+        <label for="place">Place</label>
+        <input type="text" name="place" id="place" value="{{ data['s2'][0]['place'] }}" class="form-control" placeholder="Enter place" required>
+    </div>
+
+    <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="text" name="phone" id="phone" value="{{ data['s2'][0]['phone'] }}" class="form-control" placeholder="Enter phone number" minlength="10" maxlength="10" required>
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" value="{{ data['s2'][0]['email'] }}" class="form-control" placeholder="Enter email address" required>
+    </div>
+
+    <div class="form-group text-center">
+        <button type="submit" name="ups" class="btn-submit">Update</button>
+    </div>
+
+  {% else %}
+
+  <h1>View Profile</h1>
+    <table align="center" class="table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Place</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data['res'] %}
+            <tr>
+                <td>{{ i['fname'] }}</td>
+                <td>{{ i['lname'] }}</td>
+                <td>{{ i['place'] }}</td>
+                <td>{{ i['phone'] }}</td>
+                <td>{{ i['email'] }}</td>
+                <td>
+                    <a href="?action=update&sid={{ i['user_id'] }}" class="btn-update">Edit</a> 
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+  {% endif %}
+</form>
+
+<style type="text/css">
+    /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Form Styles */
+.registration-form {
+    background-color: #ffffff;
+    padding: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    color: #333;
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    color: #555;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+input.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+button.btn-submit {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+button.btn-submit:hover {
+    background-color: #218838;
+}
+
+/* Table Styles */
+table.table {
+    width: 90%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+table.table th, table.table td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+table.table th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+table.table td {
+    background-color: #f9f9f9;
+}
+
+table.table tr:nth-child(even) td {
+    background-color: #f2f2f2;
+}
+
+table.table a.btn-update {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+table.table a.btn-update:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .registration-form {
+        padding: 20px;
+        width: 100%;
+    }
+
+    table.table {
+        width: 100%;
+    }
+}
+
+</style>
+{% include 'footer.html' %}

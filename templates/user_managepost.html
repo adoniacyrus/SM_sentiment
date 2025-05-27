@@ -1,0 +1,182 @@
+{% include 'user_header.html'%}
+
+ <div style=" background:url('static/assets/img/portfolio/branding-1.jpg') ; height: 100px; width: 100%; background-size: cover;"  >
+    </div>
+    
+    <br>
+
+    <h1 align="center">Manage Post</h1>
+
+        
+        <br>
+
+        <form method="post" enctype="multipart/form-data">
+            {% if data['s2'] %}
+            <table align="center" class="table">
+            	<tr>
+                    <th>POST</th>
+                    <td><input type="text" name="pos" value="{{ data['s2'][0]['post'] }}" required class="form-control"></td>
+                </tr>
+                <tr>
+                    <th>IMAGE</th>
+                    <td>
+                        <div>
+                        <img id="imagePreview" src="{{ data['s2'][0]['path'] }}" alt="Current Image" style="width: 100px; height: 100px; display: block; margin-bottom: 10px;">
+                        <input type="file" name="pat" id="imgInput" class="form-control-file" onchange="previewImage(event)"></div>
+                    </td>
+                </tr>
+            	
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" name="ups" value="Update" class="btn-submit">
+                    </td>
+                </tr>
+            </table>
+            {% else %}
+            <table align="center" class="table">
+                <tr>
+                    <th>POST</th>
+                    <td><input type="text" name="pos" required class="form-control"></td>
+
+                </tr>
+                <tr>
+                    <th>IMAGE</th>
+                    <td><input type="file" name="pat" required class="form-control"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" name="sub" value="Submit" class="btn-submit">
+                    </td>
+                </tr>
+            </table>
+            {% endif %}
+        </form>
+
+        <br><br>
+        
+        <h1 style="font-size: 40px" align="center"><b>View Post</b></h1>
+        <br>
+        <table align="center" border="2" class="table table-bordered">
+            <tr>
+                <th>POST</th>
+                <th>IMAGE</th>
+                <th>DATE</th>
+<!--                 <th>STATUS</th>
+ -->                <th>Out</th>
+           </tr>
+            {% for i in data['res'] %}
+            <tr>
+                <td>{{ i['post'] }}</td>
+                <td><img src="{{ i['path'] }}" width="150px" height="150px"></td>
+                <td>{{ i['date'] }}</td>
+<!--                 <td>{{ i['status'] }}</td>
+ -->                 <td>{{ i['sentiment'] }}</td>
+               <td>
+                    <a href="?action=update&pid={{ i['post_id'] }}" class="btn-update">Update</a> |
+                    <a href="?action=delete&pid={{ i['post_id'] }}" class="btn-delete">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+<script>
+    function previewImage(event) {
+        const imagePreview = document.getElementById('imagePreview');
+        const file = event.target.files[0];
+        
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+
+    
+
+<!-- Styles -->
+<style type="text/css">
+    .table {
+        width: 60%;
+        margin: 0 auto;
+        border-collapse: collapse;
+    }
+
+    .table th, .table td {
+        padding: 15px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    .btn-submit {
+        background-color: #007bff;  /* Blue color for the button */
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-submit:hover {
+        background-color: #218838;  /* Darker green on hover */
+        transform: scale(1.05);  /* Slightly enlarge the button when hovered */
+    }
+
+    .btn-submit:active {
+        background-color: #1e7e34;  /* Even darker green when clicked */
+        transform: scale(1);  /* Reset scale when clicked */
+    }
+
+    .form-control {
+        padding: 10px;
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 15px;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    /* Style for Update button (Green) */
+    .btn-update {
+        color: #28a745;  /* Green color */
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    .btn-update:hover {
+        color: #218838;
+        text-decoration: underline;
+    }
+
+    .btn-update:active {
+        color: #1e7e34;
+    }
+
+    /* Style for Delete button (Red) */
+    .btn-delete {
+        color: #dc3545;  /* Red color */
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    .btn-delete:hover {
+        color: #c82333;
+        text-decoration: underline;
+    }
+
+    .btn-delete:active {
+        color: #bd2130;
+    }
+
+</style>
+    
+    
+{% include 'footer.html'%}
